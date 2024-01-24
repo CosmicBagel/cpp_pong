@@ -4,7 +4,7 @@ it pong, wow
 
 ### Setup
 ```
-git submodule init
+git submodule update --init
 cp CMakeUserPresets.sample.json CMakeUserPresets.json
 cmake --preset Debug_x64
 # or 
