@@ -1,0 +1,26 @@
+{
+    "version": 8,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 28,
+        "patch": 1
+    },
+    "configurePresets": [
+        {
+            "name": "Debug_x64",
+            "inherits": "Debug_x64_base",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-17",
+                "CMAKE_CXX_COMPILER": "clang++-17"
+            }
+        },
+        {
+            "name": "Release_x64",
+            "inherits": "Release_x64_base",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-17",
+                "CMAKE_CXX_COMPILER": "clang++-17"
+            }
+        }
+    ]
+}
