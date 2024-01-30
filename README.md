@@ -18,7 +18,7 @@ make
 ```
 
 ### Running
-Memory leaks can be spammy, to disable them
+Memory leaks checking can be spammy, to disable it:
 ```bash
 # inside debug build folder
 EXPORT ASAN_OPTIONS=detect_leaks=0
