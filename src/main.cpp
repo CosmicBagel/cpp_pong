@@ -20,6 +20,7 @@ int main() {
     SetTargetFPS(targetFps);
 
     std::vector<std::unique_ptr<IGameObject>> gameObjects;
+
     gameObjects.push_back(std::unique_ptr<IGameObject>{new PlayerPaddle});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new ComputerPaddle});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Ball});
@@ -34,7 +35,7 @@ int main() {
         }
 
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(DARKGRAY);
         for (auto &gobj : gameObjects) {
             gobj->Draw();
         }
