@@ -2,8 +2,6 @@
 
 #include <cstddef>
 #include <format>
-#include <iostream>
-#include <ostream>
 #include <vector>
 
 #include "Crash.hpp"
@@ -23,9 +21,7 @@ class PoolManager {
     std::vector<PoolObjectWrapper<T>> pool;
 
    public:
-    explicit PoolManager<T>(size_t starting_size) {
-        pool.reserve(starting_size);
-    }
+    explicit PoolManager<T>(size_t starting_size) { pool.reserve(starting_size); }
 
     PoolObjectId Add(T object) {
         for (size_t id = 0; id < pool.size(); id++) {
@@ -43,16 +39,24 @@ class PoolManager {
 
     T Get(PoolObjectId id) {
         if (id < 0 || id >= pool.size()) {
+            Crash::panic(std::format("PoolManager Get: Out of bounds id: {}", id));
+        }
+        if (!pool[id].active) {
             Crash::panic(
-                std::format("PoolManager Get: Out of bounds id: {}", id));
+                std::format("PoolManager Get: Attempted to get inactive object with id: {}", id));
         }
         return pool[id].object;
     }
 
     void Remove(PoolObjectId id) {
         if (id < 0 || id >= pool.size()) {
+            Crash::panic(std::format("PoolManager Get: Out of bounds id: {}", id));
+        }
+        if (!pool[id].active) {
             Crash::panic(
-                std::format("PoolManager Get: Out of bounds id: {}", id));
+                std::format("PoolManager Get: Attempted to remove inactive "
+                            "object with id: {}",
+                            id));
         }
         pool[id].active = false;
     }
