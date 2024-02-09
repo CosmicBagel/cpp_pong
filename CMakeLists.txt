@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.28.3)
+
+# ## Include cmake modules
+include(FetchContent)
 
 project(cpp_pong VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -25,14 +28,22 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     target_compile_features(cpp_pong PRIVATE c_std_17 cxx_std_20)
 endif()
 
-# ## Included dependencies' source code
-add_subdirectory(external/)
+# ## Include dependencies' source code
+FetchContent_Declare(
+  cpptrace
+  GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+  GIT_TAG        v0.3.1 # <HASH or TAG>
+)
+FetchContent_MakeAvailable(cpptrace)
+add_compile_definitions(CPPTRACE_STATIC=On)
+target_link_libraries(cpp_pong PRIVATE cpptrace::cpptrace)
 
 # ## Declare dependencies
+add_subdirectory(external/)
 target_link_libraries(cpp_pong PRIVATE raylib)
 
 # CONFIGURE_DEPENDS flag makes it so that we don't have to run cmake when a new cpp file is added
-file(GLOB cpp_pong_SRC CONFIGURE_DEPENDS "src/*.cpp")
+file(GLOB cpp_pong_SRC CONFIGURE_DEPENDS "src/*.cpp" "src/*.c")
 target_sources(cpp_pong PRIVATE ${cpp_pong_SRC})
 target_include_directories(cpp_pong PRIVATE src)
 
