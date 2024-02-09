@@ -10,7 +10,11 @@ void stacktrace_and_crash(std::string errorMessage, size_t skip, int exitCode = 
     std::cerr << "Panic!!!" << std::endl;
     std::cerr << errorMessage << std::endl;
     cpptrace::generate_trace(skip).print();
-    std::quick_exit(exitCode);
+
+    // using exit (even tho its not thread safe) so that asan still shows
+    // memory leaks found after program exits. asan show no info when using std::quick_exit
+    // std::quick_exit(exitCode);
+    exit(exitCode);
 }
 
 void crash_signal_handler(int signal) {
@@ -47,18 +51,17 @@ void crash_signal_handler(int signal) {
 }
 
 void Crash::SetupSignalHandler() {
+    // usually we disable the signal handler if asan is active
+#ifndef DISABLE_CRASH_SIGNAL_HANDLER
     std::signal(SIGILL, crash_signal_handler);
     std::signal(SIGABRT, crash_signal_handler);
     std::signal(SIGBUS, crash_signal_handler);
     std::signal(SIGFPE, crash_signal_handler);
     std::signal(SIGSEGV, crash_signal_handler);
     std::signal(SIGSYS, crash_signal_handler);
+#endif
 }
 
-void Crash::panic(std::string errorMessage) {
-    stacktrace_and_crash(errorMessage, 2);
-}
+void Crash::panic(std::string errorMessage) { stacktrace_and_crash(errorMessage, 2); }
 
-void Crash::not_implemented() {
-    stacktrace_and_crash("Method/function not not_implemented", 2);
-}
+void Crash::not_implemented() { stacktrace_and_crash("Method/function not not_implemented", 2); }

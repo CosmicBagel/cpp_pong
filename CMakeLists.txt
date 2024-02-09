@@ -20,6 +20,9 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         # tail call elimination (-fno-optimize-sibling-calls).
         target_compile_options(cpp_pong PRIVATE -fsanitize=address)
         target_link_options(cpp_pong PRIVATE -fsanitize=address)
+        # disable crash signal handler (at least segv handler) so that asan catches it
+        # asan provides more useful info than just a stacktrace
+        target_compile_definitions(cpp_pong PRIVATE DISABLE_CRASH_SIGNAL_HANDLER)
     endif()
 
     # this will give us a soft enforcement of the c17 cpp20 standard, project won't error out, but 
