@@ -6,6 +6,7 @@
 
 #include "Ball.hpp"
 #include "ComputerPaddle.hpp"
+#include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
 
 int main() {
@@ -19,6 +20,12 @@ int main() {
 
     SetTargetFPS(targetFps);
 
+    // init physicsSystem
+    auto physicsSystem = PhysicsSystem::GetInstance();
+
+    // pass function pointer to collider event desired
+
+    // spawn objects
     std::vector<std::unique_ptr<IGameObject>> gameObjects;
 
     gameObjects.push_back(std::unique_ptr<IGameObject>{new PlayerPaddle});
@@ -30,10 +37,15 @@ int main() {
     }
 
     while (!WindowShouldClose()) {
+        // update systems
+        physicsSystem.Update();
+
+        // update game objects
         for (auto &gobj : gameObjects) {
             gobj->Update();
         }
 
+        // render
         BeginDrawing();
         ClearBackground(DARKGRAY);
         for (auto &gobj : gameObjects) {
