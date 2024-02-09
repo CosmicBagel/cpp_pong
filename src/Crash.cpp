@@ -1,10 +1,11 @@
 #include "Crash.hpp"
 
 #include <cpptrace/cpptrace.hpp>
+#include <cstddef>
 #include <cstdlib>
 #include <iostream>
 
-void stacktrace_and_crash(std::string errorMessage, int skip) {
+void stacktrace_and_crash(std::string errorMessage, size_t skip) {
     std::cerr << "Panic!!!" << std::endl;
     std::cerr << errorMessage << std::endl;
     cpptrace::generate_trace(skip).print();
