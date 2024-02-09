@@ -2,7 +2,8 @@
 # selecting checks https://clang.llvm.org/extra/clang-tidy/index.html#id2
 Checks: 'bugprone-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, 
          google-*, misc-*, modernize-* performance-*, portability-*, 
-         readability-*,'
+         readability-*,
+         -readability-identifier-length'
          # -cppcoreguidelines-pro-type-vararg'
 # can add -cppcoreguidelines-pro-type-vararg if you love printf (mind the comma and single quote)
 
