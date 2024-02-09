@@ -1,5 +1,7 @@
 #include <raylib.h>
 
+#include <csignal>
+#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -9,7 +11,15 @@
 #include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
 
+void HandleKeyboardInterrupt(int signal) {
+    std::cout << "Keyboard interrupt. Killing game." << std::endl;
+    std::quick_exit(signal);
+}
+
 int main() {
+    Crash::SetupSignalHandler();
+    std::signal(SIGINT, HandleKeyboardInterrupt);
+
     std::cout << "oh hey it pong" << std::endl;
 
     const int screenWidth = 800;
