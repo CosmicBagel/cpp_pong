@@ -11,6 +11,7 @@ void Ball::Init() {
 }
 
 void Ball::Draw() { DrawRectangle(transform.x, transform.y, 20, 20, drawColor); }
+
 void Ball::Update() {
     auto physObjGetResult = PhysicsSystem::GetInstance().GetRectangle(rectanglePhysicsObjectId);
     if (!physObjGetResult.success) {
@@ -47,6 +48,4 @@ void Ball::Update() {
     transform.x += xDiff;
     transform.y += yDiff;
     physObj->SetPos(transform);
-
-    // PhysicsSystem::GetInstance().SetRectangle(rectanglePhysicsObjectId, physObj);
 }
