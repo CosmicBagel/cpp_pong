@@ -7,7 +7,7 @@
 void Ball::Init() {
     transform = {250, 250};
     // initialize
-    rectanglePhysicsObjectId = PhysicsSystem::GetInstance().CreateRectangle(transform, 10, 10);
+    rectanglePhysicsObjectId = PhysicsSystem::GetInstance().CreateRectangle(transform, 20, 20);
 }
 
 auto drawColor = RED;
