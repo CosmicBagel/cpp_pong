@@ -35,7 +35,7 @@ int main() {
     SetTargetFPS(targetFps);
 
     // init physicsSystem
-    auto physicsSystem = PhysicsSystem::GetInstance();
+    PhysicsSystem &physicsSystem = PhysicsSystem::GetInstance();
 
     // pass function pointer to collider event desired
 
