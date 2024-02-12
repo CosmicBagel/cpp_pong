@@ -23,6 +23,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         # disable crash signal handler (at least segv handler) so that asan catches it
         # asan provides more useful info than just a stacktrace
         target_compile_definitions(cpp_pong PRIVATE DISABLE_CRASH_SIGNAL_HANDLER)
+        target_compile_definitions(cpp_pong PRIVATE CPP_PONG_DEBUG_BUILD)
     endif()
 
     # this will give us a soft enforcement of the c17 cpp20 standard, project won't error out, but 

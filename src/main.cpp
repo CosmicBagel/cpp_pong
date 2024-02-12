@@ -20,6 +20,10 @@ int main() {
     Crash::SetupSignalHandler();
     std::signal(SIGINT, HandleKeyboardInterrupt);
 
+#ifdef CPP_PONG_DEBUG_BUILD
+    SetTraceLogLevel(LOG_DEBUG);
+#endif
+
     std::cout << "oh hey it pong" << std::endl;
 
     const int screenWidth = 800;
