@@ -50,7 +50,6 @@ class PoolManager {
         // all current slots are full, we need to push
         size_t id = pool.size();
         pool.push_back(PoolObjectWrapper<T>{true, object});
-        TraceLog(LOG_DEBUG, std::format("added object! {}", id).c_str());
         return id;
     }
 
@@ -87,7 +86,6 @@ class PoolManager {
     auto end() { return pool.end(); }
 
     void Remove(PoolObjectId id) {
-        TraceLog(LOG_DEBUG, "remove object!");
         activeCount -= 1;
         if (id < 0 || id >= pool.size()) {
             Crash::panic(std::format("PoolManager Get: Out of bounds id: {}", id));
