@@ -37,8 +37,8 @@ class PhysicsSystem {
         return id;
     };
 
-    RetrievedPoolObject<RectanglePhysicsObject> GetRectangle(PoolObjectId id) {
-        return rectanglePhysicsObjects.Get(id);
+    RectanglePhysicsObject& GetRectangle(PoolObjectId id) {
+        return rectanglePhysicsObjects.GetInfallible(id);
     }
     bool SetRectangle(PoolObjectId id, RectanglePhysicsObject rect) {
         return rectanglePhysicsObjects.Set(id, rect);

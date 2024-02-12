@@ -2,24 +2,23 @@
 
 #include "Crash.hpp"
 #include "PhysicsSystem.hpp"
+#include "RectanglePhysicsObject.hpp"
 #include "raylib.h"
+
+PhysicsSystem& physicsSystem = PhysicsSystem::GetInstance();
 
 void Ball::Init() {
     transform = {250, 250};
     // initialize
-    rectanglePhysicsObjectId = PhysicsSystem::GetInstance().CreateRectangle(transform, 20, 20);
+    rectanglePhysicsObjectId = physicsSystem.CreateRectangle(transform, 20, 20);
 }
 
 void Ball::Draw() { DrawRectangle(transform.x, transform.y, 20, 20, drawColor); }
 
 void Ball::Update() {
-    auto physObjGetResult = PhysicsSystem::GetInstance().GetRectangle(rectanglePhysicsObjectId);
-    if (!physObjGetResult.success) {
-        Crash::panic("GetRectangle failed");
-    }
-    auto *physObj = physObjGetResult.object;
+    RectanglePhysicsObject& physObj = physicsSystem.GetRectangle(rectanglePhysicsObjectId);
 
-    if (!physObj->OverlappingObjects.empty()) {
+    if (!physObj.OverlappingObjects.empty()) {
         drawColor = GREEN;
     } else {
         drawColor = RED;
@@ -47,5 +46,5 @@ void Ball::Update() {
 
     transform.x += xDiff;
     transform.y += yDiff;
-    physObj->SetPos(transform);
+    physObj.SetPos(transform);
 }

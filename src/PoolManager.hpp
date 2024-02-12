@@ -53,7 +53,7 @@ class PoolManager {
         return id;
     }
 
-    T *GetInfallible(PoolObjectId id) {
+    T &GetInfallible(PoolObjectId id) {
         if (id < 0 || id >= pool.size()) {
             Crash::panic(std::format("PoolManager Get: Out of bounds id: {}", id));
         }
@@ -61,7 +61,7 @@ class PoolManager {
             Crash::panic(
                 std::format("PoolManager Get: Attempted to get inactive object with id: {}", id));
         }
-        return &pool[id].object;
+        return pool[id].object;
     }
 
     RetrievedPoolObject<T> Get(PoolObjectId id) {
