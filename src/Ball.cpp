@@ -10,16 +10,15 @@ void Ball::Init() {
     rectanglePhysicsObjectId = PhysicsSystem::GetInstance().CreateRectangle(transform, 20, 20);
 }
 
-auto drawColor = RED;
 void Ball::Draw() { DrawRectangle(transform.x, transform.y, 20, 20, drawColor); }
 void Ball::Update() {
     auto physObjGetResult = PhysicsSystem::GetInstance().GetRectangle(rectanglePhysicsObjectId);
     if (!physObjGetResult.success) {
         Crash::panic("GetRectangle failed");
     }
-    auto physObj = physObjGetResult.object;
+    auto *physObj = physObjGetResult.object;
 
-    if (physObj->OverlappingObjects.size() > 0) {
+    if (!physObj->OverlappingObjects.empty()) {
         drawColor = GREEN;
     } else {
         drawColor = RED;

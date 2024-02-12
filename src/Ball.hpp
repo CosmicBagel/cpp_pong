@@ -8,6 +8,7 @@ class Ball final : public IGameObject {
    private:
     TransformComponent transform;
     PoolObjectId rectanglePhysicsObjectId;
+    Color drawColor = RED;
 
    public:
     void Init() override;
