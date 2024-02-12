@@ -1,12 +1,16 @@
 #include "PlayerPaddle.hpp"
 
+#include <raylib.h>
+
 #include <format>
 
-#include "raylib.h"
+#include "PhysicsSystem.hpp"
 
 void PlayerPaddle::Init() {
     transform.x = 400;
     transform.y = 200;
+    auto tempRectanglePhysicsObjectId =
+        PhysicsSystem::GetInstance().CreateRectangle(transform, 100, 100);
 }
 void PlayerPaddle::Draw() {
     paddleGraphic.Draw(transform);

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cstddef>
+#include <vector>
 
+#include "PoolManager.hpp"
 #include "TransformComponent.hpp"
 
 class PhysicsSystem;
@@ -15,24 +17,30 @@ class RectanglePhysicsObject final {
     int width = 0, height = 0;
 
    public:
-    RectanglePhysicsObject(){};
+    std::vector<PoolObjectId> OverlappingObjects;
+
+    RectanglePhysicsObject() = default;
+    RectanglePhysicsObject(TransformComponent transform, int width, int height)
+        : transform(transform), width(width), height(height){};
 
     RectanglePhysicsObject(const RectanglePhysicsObject& source)
         : id(source.id),
           transform(source.transform),
           width(source.width),
-          height(source.height){};
+          height(source.height),
+          OverlappingObjects(source.OverlappingObjects){};
 
     RectanglePhysicsObject& operator=(const RectanglePhysicsObject& source) {
         id = source.id;
         transform = source.transform;
         width = source.width;
         height = source.height;
+        OverlappingObjects = source.OverlappingObjects;
         return *this;
     };
 
-    RectanglePhysicsObject(RectanglePhysicsObject&&) = default;
-    RectanglePhysicsObject& operator=(RectanglePhysicsObject&&) = default;
+    RectanglePhysicsObject(RectanglePhysicsObject&&) = delete;
+    RectanglePhysicsObject& operator=(RectanglePhysicsObject&&) = delete;
 
     ~RectanglePhysicsObject();
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IGameObject.hpp"
-#include "TransformComponent.hpp"
 #include "PoolManager.hpp"
+#include "TransformComponent.hpp"
 
 class Ball final : public IGameObject {
    private:

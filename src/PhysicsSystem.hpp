@@ -1,9 +1,8 @@
 #pragma once
 
-// #include <raylib.h>
-
 #include "PoolManager.hpp"
 #include "RectanglePhysicsObject.hpp"
+#include "TransformComponent.hpp"
 
 const size_t PHYSICS_RESERVE_SIZE = 100;
 
@@ -17,6 +16,11 @@ class PhysicsSystem {
     PhysicsSystem() : rectanglePhysicsObjects(PHYSICS_RESERVE_SIZE){};
 
    public:
+    PhysicsSystem(const PhysicsSystem&) = delete;
+    PhysicsSystem(PhysicsSystem&&) = delete;
+    PhysicsSystem& operator=(const PhysicsSystem&) = delete;
+    PhysicsSystem& operator=(PhysicsSystem&&) = delete;
+
     static PhysicsSystem& GetInstance() {
         if (instance == nullptr) {
             instance = new PhysicsSystem();
@@ -26,14 +30,19 @@ class PhysicsSystem {
 
     void Update();
 
-    PoolObjectId CreateRectangle() {
-        auto r = RectanglePhysicsObject();
+    PoolObjectId CreateRectangle(TransformComponent transform, int width, int height) {
+        auto r = RectanglePhysicsObject(transform, width, height);
         PoolObjectId id = rectanglePhysicsObjects.Add(r);
         r.id = id;
         return id;
     };
 
-    void RemoveRectangle(PoolObjectId id) {
-        rectanglePhysicsObjects.Remove(id);
+    RetrievedPoolObject<RectanglePhysicsObject> GetRectangle(PoolObjectId id) {
+        return rectanglePhysicsObjects.Get(id);
     }
+    bool SetRectangle(PoolObjectId id, RectanglePhysicsObject rect) {
+        return rectanglePhysicsObjects.Set(id, rect);
+    }
+
+    void RemoveRectangle(PoolObjectId id) { rectanglePhysicsObjects.Remove(id); }
 };
