@@ -36,6 +36,8 @@ class PoolManager {
     PoolManager(PoolManager &&) = delete;
     PoolManager &operator=(const PoolManager &) = delete;
     PoolManager &operator=(PoolManager &&) = delete;
+    ~PoolManager() = default;
+
     explicit PoolManager<T>(size_t starting_size) { pool.reserve(starting_size); }
 
     PoolObjectId Add(T object) {
