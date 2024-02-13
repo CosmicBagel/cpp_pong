@@ -37,6 +37,9 @@ class PhysicsSystem {
         return id;
     };
 
+    // Do not store this reference! (It is a ref to a vector element)
+    //
+    // Also creating more rectangles could invalidate this reference
     RectanglePhysicsObject& GetRectangle(PoolObjectId id) {
         return rectanglePhysicsObjects.GetInfallible(id);
     }
