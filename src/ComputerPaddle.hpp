@@ -2,14 +2,17 @@
 
 #include "IGameObject.hpp"
 #include "PaddleGraphicComponent.hpp"
+#include "RectangleColliderComponent.hpp"
 #include "TransformComponent.hpp"
 
 class ComputerPaddle final : public IGameObject {
    private:
     PaddleGraphicComponent paddleGraphic;
     TransformComponent transform;
+    RectangleColliderComponent collider;
 
    public:
+    ComputerPaddle() : transform({50, 200}), collider(transform, 15, 100){};
     void Init() override;
     void Draw() override;
     void Update() override;

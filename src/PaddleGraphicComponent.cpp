@@ -3,5 +3,5 @@
 #include <raylib.h>
 
 void PaddleGraphicComponent::Draw(TransformComponent transform) const {
-    DrawRectangle(transform.x, transform.y, 100, 100, BLACK);
+    DrawRectangle(transform.x, transform.y, 15, 110, BLACK);
 }
