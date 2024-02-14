@@ -14,7 +14,6 @@
 
 /*
  * todo
- *   - top and bottom borders (regular bounce)
  *   - bounce ball off paddle at different angles depending where ball hits paddle
  *       - physics object / collider tags
  *       - ball responds to wall and paddle differently
