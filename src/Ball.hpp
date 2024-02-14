@@ -2,14 +2,12 @@
 
 #include "IGameObject.hpp"
 #include "PhysicsObjectTag.hpp"
-#include "PoolManager.hpp"
 #include "RectangleColliderComponent.hpp"
 #include "TransformComponent.hpp"
 
 class Ball final : public IGameObject {
    private:
     TransformComponent transform;
-    PoolObjectId rectanglePhysicsObjectId;
     RectangleColliderComponent collider;
     Color drawColor = RED;
     int velX = 1;
