@@ -12,7 +12,8 @@ class ComputerPaddle final : public IGameObject {
     RectangleColliderComponent collider;
 
    public:
-    ComputerPaddle() : transform({50, 200}), collider(transform, 15, 100){};
+    ComputerPaddle()
+        : transform({50, 200}), collider(transform, 15, 100, PhysicsObjectTag::Paddle){};
     void Init() override;
     void Draw() override;
     void Update() override;

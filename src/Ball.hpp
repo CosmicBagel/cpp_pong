@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IGameObject.hpp"
+#include "PhysicsObjectTag.hpp"
 #include "PoolManager.hpp"
 #include "RectangleColliderComponent.hpp"
 #include "TransformComponent.hpp"
@@ -15,7 +16,7 @@ class Ball final : public IGameObject {
     int velY = 0;
 
    public:
-    Ball() : transform({250, 250}), collider(transform, 20, 20){};
+    Ball() : transform({250, 250}), collider(transform, 20, 20, PhysicsObjectTag::None){};
 
     void Init() override;
     void Draw() override;

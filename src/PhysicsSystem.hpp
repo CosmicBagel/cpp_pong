@@ -1,5 +1,6 @@
 #pragma once
 
+#include "PhysicsObjectTag.hpp"
 #include "PoolManager.hpp"
 #include "RectanglePhysicsObject.hpp"
 #include "TransformComponent.hpp"
@@ -30,8 +31,8 @@ class PhysicsSystem {
 
     void Update();
 
-    PoolObjectId CreateRectangle(TransformComponent transform, int width, int height) {
-        auto r = RectanglePhysicsObject(transform, width, height);
+    PoolObjectId CreateRectangle(TransformComponent transform, int width, int height, PhysicsObjectTag tag) {
+        auto r = RectanglePhysicsObject(transform, width, height, tag);
         PoolObjectId id = rectanglePhysicsObjects.Add(r);
         r.id = id;
         return id;

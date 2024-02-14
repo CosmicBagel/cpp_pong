@@ -2,6 +2,7 @@
 
 #include "IGameObject.hpp"
 #include "PaddleGraphicComponent.hpp"
+#include "PhysicsObjectTag.hpp"
 #include "RectangleColliderComponent.hpp"
 
 class PlayerPaddle final : public IGameObject {
@@ -12,7 +13,8 @@ class PlayerPaddle final : public IGameObject {
     RectangleColliderComponent collider;
 
    public:
-    PlayerPaddle() : transform({735, 200}), collider(transform, 15, 110){};
+    PlayerPaddle()
+        : transform({735, 200}), collider(transform, 15, 110, PhysicsObjectTag::Paddle){};
 
     void Init() override;
     void Draw() override;

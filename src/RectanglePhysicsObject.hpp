@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "PhysicsObjectTag.hpp"
 #include "PoolManager.hpp"
 #include "TransformComponent.hpp"
 
@@ -15,13 +16,15 @@ class RectanglePhysicsObject final {
     size_t id = 0;
     TransformComponent transform;
     int width = 0, height = 0;
+    PhysicsObjectTag tag = PhysicsObjectTag::None;
 
    public:
     std::vector<PoolObjectId> OverlappingObjects;
 
     RectanglePhysicsObject() = default;
-    RectanglePhysicsObject(TransformComponent transform, int width, int height)
-        : transform(transform), width(width), height(height){};
+    RectanglePhysicsObject(TransformComponent transform, int width, int height,
+                           PhysicsObjectTag tag)
+        : transform(transform), width(width), height(height), tag(tag){};
 
     RectanglePhysicsObject(const RectanglePhysicsObject& source)
         : id(source.id),
@@ -50,4 +53,5 @@ class RectanglePhysicsObject final {
     void SetWidth(int _width) { width = _width; };
     int GetHeight() const { return height; };
     void SetHeight(int _height) { height = _height; };
+    PhysicsObjectTag GetTag() { return tag; }
 };

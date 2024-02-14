@@ -2,6 +2,7 @@
 
 #include <functional>
 
+#include "PhysicsObjectTag.hpp"
 #include "PhysicsSystem.hpp"
 #include "PoolManager.hpp"
 #include "TransformComponent.hpp"
@@ -11,9 +12,10 @@ class RectangleColliderComponent {
     PhysicsSystem &physicsSystem;
     const PoolObjectId id;
 
-    RectangleColliderComponent(TransformComponent initalTransform, int width, int height)
+    RectangleColliderComponent(TransformComponent initalTransform, int width, int height,
+                               PhysicsObjectTag tag)
         : physicsSystem(PhysicsSystem::GetInstance()),
-          id(physicsSystem.CreateRectangle(initalTransform, width, height)) {}
+          id(physicsSystem.CreateRectangle(initalTransform, width, height, tag)) {}
 
     RectangleColliderComponent(const RectangleColliderComponent &) = delete;
     RectangleColliderComponent(RectangleColliderComponent &&) = delete;
@@ -37,6 +39,8 @@ class RectangleColliderComponent {
             lambdaCallback(*it);
         }
     };
+
+    PhysicsObjectTag GetTag() { return physicsSystem.GetRectangle(id).GetTag(); };
 
     void UpdatePosition(TransformComponent transform) {
         physicsSystem.GetRectangle(id).SetPos(transform);
