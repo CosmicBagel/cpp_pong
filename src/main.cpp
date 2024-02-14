@@ -46,8 +46,6 @@ int main() {
     // init physicsSystem
     PhysicsSystem &physicsSystem = PhysicsSystem::GetInstance();
 
-    // pass function pointer to collider event desired
-
     // spawn objects
     std::vector<std::unique_ptr<IGameObject>> gameObjects;
 
