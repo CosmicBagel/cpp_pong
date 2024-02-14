@@ -10,6 +10,16 @@
 #include "ComputerPaddle.hpp"
 #include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
+#include "Wall.hpp"
+
+/*
+ * todo
+ *   - top and bottom borders (regular bounce)
+ *   - bounce ball off paddle at different angles depending where ball hits paddle
+ *       - physics object / collider tags
+ *       - ball responds to wall and paddle differently
+ *         (handle case if ball intersects both wall and paddle)
+ */
 
 void HandleKeyboardInterrupt(int signal) {
     std::cout << "Keyboard interrupt. Killing game." << std::endl;
@@ -45,6 +55,8 @@ int main() {
     gameObjects.push_back(std::unique_ptr<IGameObject>{new PlayerPaddle});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new ComputerPaddle});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Ball});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 0})});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 580})});
 
     for (auto &gobj : gameObjects) {
         gobj->Init();
