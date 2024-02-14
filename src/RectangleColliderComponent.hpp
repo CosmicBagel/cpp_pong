@@ -24,7 +24,7 @@ class RectangleColliderComponent {
 
     ~RectangleColliderComponent() { physicsSystem.RemoveRectangle(id); }
 
-    void CheckIntersections(void (*callbackPtr)(PoolObjectId otherId)) {
+    void ProcessIntersections(void (*callbackPtr)(PoolObjectId otherId)) {
         auto physObj = physicsSystem.GetRectangle(id);
         for (auto it = physObj.OverlappingObjects.begin(); it != physObj.OverlappingObjects.end();
              it++) {
@@ -32,7 +32,7 @@ class RectangleColliderComponent {
         }
     };
 
-    void CheckIntersections(std::function<void(PoolObjectId otherId)> lambdaCallback) {
+    void ProcessIntersections(std::function<void(PoolObjectId otherId)> lambdaCallback) {
         auto physObj = physicsSystem.GetRectangle(id);
         for (auto it = physObj.OverlappingObjects.begin(); it != physObj.OverlappingObjects.end();
              it++) {

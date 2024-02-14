@@ -13,7 +13,7 @@ void Ball::Draw() { DrawRectangle(transform.x, transform.y, 20, 20, drawColor); 
 
 void Ball::Update() {
     drawColor = RED;
-    collider.CheckIntersections([&](PoolObjectId otherId) {
+    collider.ProcessIntersections([&](PoolObjectId otherId) {
         drawColor = GREEN;
         velX *= -1;
         velY *= -1;
