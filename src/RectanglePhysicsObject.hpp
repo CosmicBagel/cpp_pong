@@ -31,6 +31,7 @@ class RectanglePhysicsObject final {
           transform(source.transform),
           width(source.width),
           height(source.height),
+          tag(source.tag),
           OverlappingObjects(source.OverlappingObjects){};
 
     RectanglePhysicsObject& operator=(const RectanglePhysicsObject& source) {
@@ -38,6 +39,7 @@ class RectanglePhysicsObject final {
         transform = source.transform;
         width = source.width;
         height = source.height;
+        tag = source.tag;
         OverlappingObjects = source.OverlappingObjects;
         return *this;
     };
