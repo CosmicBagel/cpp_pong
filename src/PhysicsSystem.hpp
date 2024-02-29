@@ -34,7 +34,7 @@ class PhysicsSystem {
     PoolObjectId CreateRectangle(TransformComponent transform, int width, int height, PhysicsObjectTag tag) {
         auto r = RectanglePhysicsObject(transform, width, height, tag);
         PoolObjectId id = rectanglePhysicsObjects.Add(r);
-        r.id = id;
+        rectanglePhysicsObjects.Get(id).object->id = id;
         return id;
     };
 
