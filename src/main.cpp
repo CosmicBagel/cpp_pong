@@ -59,7 +59,7 @@ int main() {
         gobj->Init();
     }
 
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose() && !IsKeyDown(KEY_Q)) {
         // update systems
         physicsSystem.Update();
 
