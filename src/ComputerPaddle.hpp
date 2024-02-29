@@ -13,7 +13,7 @@ class ComputerPaddle final : public IGameObject {
 
    public:
     ComputerPaddle()
-        : transform({50, 200}), collider(transform, 15, 100, PhysicsObjectTag::Paddle){};
+        : transform({50, 200}), collider(transform, 15, 110, PhysicsObjectTag::Paddle){};
     void Init() override;
     void Draw() override;
     void Update() override;
