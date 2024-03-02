@@ -13,14 +13,8 @@
 #include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
 #include "Wall.hpp"
+#include "ScoreKeeper.hpp"
 
-/*
- * todo
- *   - bounce ball off paddle at different angles depending where ball hits paddle
- *       - physics object / collider tags
- *       - ball responds to wall and paddle differently
- *         (handle case if ball intersects both wall and paddle)
- */
 
 void HandleKeyboardInterrupt(int signal) {
     std::cout << "Keyboard interrupt. Killing game." << std::endl;
@@ -58,6 +52,7 @@ int main() {
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 580})});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Goal({0, 0}, false)});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Goal({780, 0}, true)});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new ScoreKeeper});
 
     for (auto &gobj : gameObjects) {
         gobj->Init();
