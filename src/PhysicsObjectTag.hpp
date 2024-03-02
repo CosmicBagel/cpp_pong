@@ -1,5 +1,5 @@
 #pragma once
 
 enum class PhysicsObjectTag { 
-    None, Wall, Paddle 
+    None, Wall, Paddle, Goal, Ball
 };

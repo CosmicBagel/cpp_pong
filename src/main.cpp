@@ -8,6 +8,8 @@
 
 #include "Ball.hpp"
 #include "ComputerPaddle.hpp"
+#include "Events.hpp"
+#include "Goal.hpp"
 #include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
 #include "Wall.hpp"
@@ -54,6 +56,8 @@ int main() {
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Ball});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 0})});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 580})});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new Goal({0, 0}, false)});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new Goal({780, 0}, true)});
 
     for (auto &gobj : gameObjects) {
         gobj->Init();

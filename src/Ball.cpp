@@ -1,18 +1,32 @@
 #include "Ball.hpp"
 
+#include <functional>
+
+#include "Events.hpp"
 #include "PhysicsObjectTag.hpp"
 #include "PhysicsSystem.hpp"
 #include "PoolManager.hpp"
 #include "RectanglePhysicsObject.hpp"
 #include "raylib.h"
 
-PhysicsSystem& physicsSystem = PhysicsSystem::GetInstance();
+void Ball::Init() {
+    EventManager& em = EventManager::GetInstance();
+    std::function<void()> fn = std::bind(&Ball::ResetPos, this);
+    em.Subscribe(EventName::PlayerScored, fn);
+    em.Subscribe(EventName::ComputerScored, fn);
+}
 
-void Ball::Init() {}
+void Ball::ResetPos() {
+    velX = StartingVelX; 
+    velY = StartingVelY; 
+    transform = StartingPos;
+    collider.UpdatePosition(transform);
+}
 
 void Ball::Draw() { DrawRectangle(transform.x, transform.y, 20, 20, drawColor); }
 
 void Ball::Update() {
+    PhysicsSystem& physicsSystem = PhysicsSystem::GetInstance();
     drawColor = RED;
     collider.ProcessIntersections([&](PoolObjectId otherId) {
         PhysicsObjectTag otherTag = physicsSystem.GetRectangle(otherId).GetTag();

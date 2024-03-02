@@ -10,11 +10,17 @@ class Ball final : public IGameObject {
     TransformComponent transform;
     RectangleColliderComponent collider;
     Color drawColor = RED;
-    int velX = 1;
+    int velX = 2;
     int velY = 0;
 
+    const TransformComponent StartingPos = {400, 300};
+    const int StartingVelX = 2;
+    const int StartingVelY = 0;
+
+    void ResetPos();
+
    public:
-    Ball() : transform({250, 250}), collider(transform, 20, 20, PhysicsObjectTag::None){};
+    Ball() : transform(StartingPos), collider(transform, 20, 20, PhysicsObjectTag::Ball){};
 
     void Init() override;
     void Draw() override;
