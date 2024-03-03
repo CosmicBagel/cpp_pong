@@ -9,6 +9,8 @@
 #include "RectanglePhysicsObject.hpp"
 #include "raylib.h"
 
+const TransformComponent Ball::StartingPos = {400, 300};
+
 void Ball::Init() {
     EventManager& em = EventManager::GetInstance();
     std::function<void()> fn = std::bind(&Ball::ResetPos, this);

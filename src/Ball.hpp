@@ -13,9 +13,9 @@ class Ball final : public IGameObject {
     int velX = 2;
     int velY = 0;
 
-    const TransformComponent StartingPos = {400, 300};
-    const int StartingVelX = 2;
-    const int StartingVelY = 0;
+    static const TransformComponent StartingPos;
+    static const int StartingVelX = 2;
+    static const int StartingVelY = 0;
 
     void ResetPos();
 
