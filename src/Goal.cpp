@@ -13,9 +13,9 @@ void Goal::Update() {
             return;
         }
         if (IsPlayerGoal) {
-            EventManager::GetInstance().Invoke(EventName::PlayerScored);
-        } else {
             EventManager::GetInstance().Invoke(EventName::ComputerScored);
+        } else {
+            EventManager::GetInstance().Invoke(EventName::PlayerScored);
         }
     });
 }
