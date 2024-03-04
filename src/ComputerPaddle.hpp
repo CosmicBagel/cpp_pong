@@ -10,10 +10,13 @@ class ComputerPaddle final : public IGameObject {
     PaddleGraphicComponent paddleGraphic;
     TransformComponent transform;
     RectangleColliderComponent collider;
+    TransformComponent &ballTransform;
 
    public:
-    ComputerPaddle()
-        : transform({50, 200}), collider(transform, 15, 110, PhysicsObjectTag::Paddle){};
+    ComputerPaddle(TransformComponent &ballTransform)
+        : transform({50, 200}),
+          collider(transform, 15, 110, PhysicsObjectTag::Paddle),
+          ballTransform(ballTransform){};
     void Init() override;
     void Draw() override;
     void Update() override;

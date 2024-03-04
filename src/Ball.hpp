@@ -7,7 +7,6 @@
 
 class Ball final : public IGameObject {
    private:
-    TransformComponent transform;
     RectangleColliderComponent collider;
     Color drawColor = RED;
     int velX = 2;
@@ -20,6 +19,9 @@ class Ball final : public IGameObject {
     void ResetPos();
 
    public:
+    // public so that we can pass it to computer paddle
+    TransformComponent transform;
+
     Ball() : transform(StartingPos), collider(transform, 20, 20, PhysicsObjectTag::Ball){};
 
     void Init() override;

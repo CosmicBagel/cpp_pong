@@ -12,9 +12,8 @@
 #include "Goal.hpp"
 #include "PhysicsSystem.hpp"
 #include "PlayerPaddle.hpp"
-#include "Wall.hpp"
 #include "ScoreKeeper.hpp"
-
+#include "Wall.hpp"
 
 void HandleKeyboardInterrupt(int signal) {
     std::cout << "Keyboard interrupt. Killing game." << std::endl;
@@ -45,9 +44,10 @@ int main() {
     // spawn objects
     std::vector<std::unique_ptr<IGameObject>> gameObjects;
 
+    Ball *ball = new Ball;
+    gameObjects.push_back(std::unique_ptr<IGameObject>{ball});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new PlayerPaddle});
-    gameObjects.push_back(std::unique_ptr<IGameObject>{new ComputerPaddle});
-    gameObjects.push_back(std::unique_ptr<IGameObject>{new Ball});
+    gameObjects.push_back(std::unique_ptr<IGameObject>{new ComputerPaddle(ball->transform)});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 0})});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Wall({0, 580})});
     gameObjects.push_back(std::unique_ptr<IGameObject>{new Goal({0, 0}, false)});
