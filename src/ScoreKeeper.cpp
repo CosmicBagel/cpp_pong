@@ -5,15 +5,16 @@
 #include <format>
 
 #include "Events.hpp"
+#include "Logging.hpp"
 
 void ScoreKeeper::PlayerScored() {
     playerScore++;
-    TraceLog(LOG_DEBUG, "player scored!!!");
+    DebugLog("player scored!!!");
 }
 
 void ScoreKeeper::ComputerScored() {
     computerScore++;
-    TraceLog(LOG_DEBUG, "computer scored!!!");
+    DebugLog("computer scored!!!");
 }
 
 void ScoreKeeper::Init() {

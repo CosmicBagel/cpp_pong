@@ -19,8 +19,8 @@ void Ball::Init() {
 }
 
 void Ball::ResetPos() {
-    velX = StartingVelX; 
-    velY = StartingVelY; 
+    velX = StartingVelX;
+    velY = StartingVelY;
     transform = StartingPos;
     collider.UpdatePosition(transform);
 }
@@ -37,25 +37,25 @@ void Ball::Update() {
 
         switch (otherTag) {
             case PhysicsObjectTag::Paddle: {
-                // TraceLog(LOG_DEBUG, "Hit paddle");
+                // DebugLog("Hit paddle");
                 velX *= -1;
 
                 int otherCenter = otherHeight / 2 + otherPos.y;
-                // TraceLog(LOG_DEBUG, std::format("other center {}", otherCenter).c_str());
+                // DebugLog("other center {}", otherCenter);
                 int thisCenter = 10 + transform.y;
-                // TraceLog(LOG_DEBUG, std::format("this center {}", thisCenter).c_str());
+                // DebugLog("this center {}", thisCenter);
                 int centerDistance = otherCenter - thisCenter;
 
                 velY = (int)(centerDistance * -1 * 0.05F);
-                // TraceLog(LOG_DEBUG, std::format("Center distance {}", centerDistance).c_str());
+                // DebugLog("Center distance {}", centerDistance);
                 break;
             }
             case PhysicsObjectTag::Wall:
-                // TraceLog(LOG_DEBUG, "Hit wall");
+                // DebugLog("Hit wall");
                 velY *= -1;
                 break;
             case PhysicsObjectTag::None:
-                // TraceLog(LOG_DEBUG, "Hit unknown object");
+                // DebugLog("Hit unknown object");
                 break;
         }
 

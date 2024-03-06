@@ -1,8 +1,8 @@
 #include "Events.hpp"
 
-#include <format>
 #include <functional>
 
+#include "Logging.hpp"
 #include "raylib.h"
 
 EventManager* EventManager::instance = nullptr;
@@ -17,15 +17,12 @@ void EventManager::Subscribe(EventName name, std::function<void()> callback) {
 void EventManager::Invoke(EventName name) {
     if (!eventMap.contains(name)) {
         std::string nameStr = EventNameStrings[(int)name];
-        TraceLog(LOG_ERROR,
-                 std::format("Attempted to invoke uninitalized event: {}", nameStr).c_str());
+        MyTraceLog(LOG_ERROR, "Attempted to invoke uninitalized event: {}", nameStr);
         return;
     }
     if (eventMap[name].empty()) {
         std::string nameStr = EventNameStrings[(int)name];
-        TraceLog(
-            LOG_WARNING,
-            std::format("Invoked event: {}, but it was empty (no subscribers)", nameStr).c_str());
+        MyTraceLog(LOG_WARNING, "Invoked event: {}, but it was empty (no subscribers)", nameStr);
         return;
     }
 
