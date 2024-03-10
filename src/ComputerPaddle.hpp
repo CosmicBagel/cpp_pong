@@ -11,6 +11,7 @@ class ComputerPaddle final : public IGameObject {
     TransformComponent transform;
     RectangleColliderComponent collider;
     TransformComponent &ballTransform;
+    TransformComponent moveTargetTransform;
 
    public:
     ComputerPaddle(TransformComponent &ballTransform)
